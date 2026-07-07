@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#152A44">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="LENAXIS">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<title>LENAXIS — Plateforme d’échange · Programme assurance filière bois</title>
+<style>
+/* ==========================================================================
+   PLATEFORME LENAXIS — Programme assurance filière bois — Version 2
+   Conception : Cabinet SECURE — 7 juillet 2026
+   ========================================================================== */
+:root{
+  --navy-900:#152A44;
+  --navy:#1E3A5F;
+  --navy-600:#2C4F7C;
+  --steel:#5E6E82;
+  --ink:#1B2634;
+  --ink-2:#3C4A5C;
+  --paper:#F3F5F8;
+  --card:#FFFFFF;
+  --line:#D9E0E8;
+  --line-2:#E7ECF1;
+  --teal:#0E7580;
+  --teal-soft:#E2F0F1;
+  --green:#059669;
+  --green-soft:#E4F4EE;
+  --orange:#D97706;
+  --orange-soft:#FBEFDD;
+  --red:#DC2626;
+  --red-soft:#FBE7E7;
+  --radius:12px;
+  --radius-s:8px;
+  --shadow:0 1px 2px rgba(21,42,68,.05),0 4px 14px rgba(21,42,68,.06);
+  --shadow-l:0 10px 34px rgba(21,42,68,.16);
+  --font:Arial,"Helvetica Neue",Helvetica,sans-serif;
+  --mono:"SF Mono",Consolas,"Liberation Mono",Menlo,monospace;
+  --sidebar-w:264px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--paper);color:var(--ink);
+  font-size:15px;line-height:1.62;-webkit-font-smoothing:antialiased}
+a{color:var(--navy-600);text-decoration:none}
+a:hover{text-decoration:underline}
+strong{color:var(--navy-900)}
+img{display:block;max-width:100%}
+::selection{background:var(--teal-soft)}
+
+.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:.55rem}
+.section-h{font-size:1.28rem;font-weight:700;color:var(--navy-900);letter-spacing:-.01em;
+  margin-bottom:.35rem}
+.section-sub{color:var(--steel);font-size:.92rem;max-width:70ch;margin-bottom:1.4rem}
+.mono{font-family:var(--mono);font-size:.78rem;color:var(--steel)}
+
+/* ==========================================================================
+   COQUILLE APPLICATIVE
+   ========================================================================== */
+.topbar{position:fixed;top:0;left:0;right:0;height:52px;z-index:40;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);display:flex;align-items:center;
+  gap:1rem;padding:0 1.1rem}
+.topbar__burger{display:none;flex-direction:column;gap:4px;background:none;border:none;
+  cursor:pointer;padding:.4rem}
+.topbar__burger span{display:block;width:20px;height:2px;background:var(--navy);border-radius:2px}
+.topbar__ctx{font-size:.78rem;color:var(--steel);white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis}
+.topbar__ctx b{color:var(--navy-900);font-weight:700}
+.topbar__spacer{flex:1}
+.chip-conf{font-size:.64rem;font-weight:700;letter-spacing:.1em;color:var(--red);
+  border:1px solid var(--red);border-radius:4px;padding:.2rem .55rem;white-space:nowrap}
+.topbar__date{font-family:var(--mono);font-size:.72rem;color:var(--steel);white-space:nowrap}
+
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-w);z-index:50;
+  background:var(--navy-900);color:#E8EEF5;display:flex;flex-direction:column;
+  padding:1.35rem 1.1rem 1.1rem}
+.sidebar__brand{display:flex;align-items:center;gap:.65rem;padding:0 .35rem;margin-bottom:.4rem}
+.sidebar__name{font-size:1.14rem;font-weight:700;letter-spacing:.26em;color:#fff}
+.sidebar__tag{font-size:.66rem;letter-spacing:.07em;text-transform:uppercase;
+  color:#9FB4CC;padding:0 .35rem;margin-bottom:1.6rem;line-height:1.5}
+.nav{display:flex;flex-direction:column;gap:.15rem;flex:1}
+.nav a{display:block;padding:.58rem .8rem;border-radius:8px;color:#C6D4E4;
+  font-size:.88rem;font-weight:600;border-left:3px solid transparent;
+  transition:background .12s ease,color .12s ease}
+.nav a:hover{background:rgba(255,255,255,.06);color:#fff;text-decoration:none}
+.nav a.active{background:rgba(255,255,255,.09);color:#fff;border-left-color:var(--teal)}
+.sidebar__foot{margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.12);
+  font-size:.68rem;color:#8FA6C0;line-height:1.6;padding-left:.35rem}
+.sidebar__foot b{color:#D5E1EE;font-weight:700}
+.scrim{display:none;position:fixed;inset:0;z-index:45;background:rgba(21,42,68,.4)}
+body.nav-open .scrim{display:block}
+
+.main{margin-left:var(--sidebar-w);padding-top:52px;min-height:100vh;
+  display:flex;flex-direction:column}
+.view{display:none;padding:2.2rem 2.6rem 2rem;max-width:1180px;width:100%;
+  animation:viewIn .28s ease}
+.view.active{display:block}
+@keyframes viewIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.legal{margin-top:auto;padding:1.4rem 2.6rem 1.6rem;font-size:.7rem;color:var(--steel);
+  border-top:1px solid var(--line);line-height:1.65;max-width:1180px}
+.legal b{color:var(--navy-600)}
+
+/* ==========================================================================
+   COMPOSANTS
+   ========================================================================== */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:1.35rem 1.5rem}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+
+.pill{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;border-radius:999px;padding:.22rem .7rem;white-space:nowrap}
+.pill--green{background:var(--green-soft);color:var(--green)}
+.pill--orange{background:var(--orange-soft);color:var(--orange)}
+.pill--gray{background:var(--line-2);color:var(--steel)}
+.pill--teal{background:var(--teal-soft);color:var(--teal)}
+
+/* --- Héros photo --- */
+.hero{position:relative;border-radius:16px;overflow:hidden;box-shadow:var(--shadow-l);
+  margin-bottom:1.1rem;min-height:340px;display:flex;align-items:flex-end}
+.hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero__veil{position:absolute;inset:0;background:
+  linear-gradient(100deg,rgba(21,42,68,.94) 0%,rgba(21,42,68,.82) 42%,rgba(21,42,68,.42) 100%)}
+.hero__body{position:relative;padding:2.6rem 2.8rem 2.2rem;max-width:720px;color:#fff}
+.hero__body .eyebrow{color:#7FD0D8}
+.hero h1{font-size:2.05rem;line-height:1.16;font-weight:700;letter-spacing:-.015em;
+  margin:.15rem 0 .8rem;color:#fff}
+.hero p{color:#D9E3EE;max-width:62ch;font-size:.95rem}
+.hero__parties{margin-top:1.2rem;display:flex;gap:.5rem;flex-wrap:wrap}
+.party{font-size:.72rem;font-weight:700;letter-spacing:.05em;color:#fff;
+  border:1px solid rgba(255,255,255,.45);border-radius:6px;padding:.3rem .7rem;
+  background:rgba(255,255,255,.08)}
+.party--x{border:none;background:none;color:#9FB4CC;padding:.3rem .1rem}
+
+/* --- Bandeau des trois structures --- */
+.partners{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.2rem}
+.partner{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:1rem 1.2rem;display:flex;align-items:center;gap:1rem}
+.partner__logo{flex:0 0 auto;height:56px;width:96px;display:flex;align-items:center;
+  justify-content:center}
+.partner__logo img{max-height:56px;max-width:96px;object-fit:contain}
+.wordmark-galactia{font-size:1.05rem;font-weight:700;letter-spacing:.2em;color:var(--navy-900);
+  border-bottom:3px solid var(--teal);padding-bottom:.2rem}
+.partner__meta b{display:block;font-size:.88rem;color:var(--navy-900)}
+.partner__meta span{font-size:.74rem;color:var(--steel)}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.2rem}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:1.15rem 1.25rem}
+.stat__n{font-size:1.7rem;font-weight:700;color:var(--navy);letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums}
+.stat__n small{font-size:.95rem;font-weight:700;color:var(--navy-600)}
+.stat__l{font-size:.76rem;color:var(--steel);margin-top:.3rem;line-height:1.45}
+
+.axstrip{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.9rem}
+.axchip{font-family:var(--mono);font-size:.72rem;font-weight:700;border-radius:6px;
+  padding:.28rem .55rem;border:1px solid transparent}
+.axchip--g{background:var(--green-soft);color:var(--green)}
+.axchip--o{background:var(--orange-soft);color:var(--orange)}
+.axchip--n{background:var(--line-2);color:var(--steel)}
+.axlegend{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:.8rem;font-size:.74rem;color:var(--steel)}
+.axlegend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:.35rem;vertical-align:-1px}
+
+/* --- Programme --- */
+.gar{border-top:3px solid var(--navy);border-radius:var(--radius);background:var(--card);
+  border-right:1px solid var(--line);border-bottom:1px solid var(--line);border-left:1px solid var(--line);
+  box-shadow:var(--shadow);padding:1.15rem 1.25rem}
+.gar h3{font-size:.95rem;color:var(--navy-900);margin-bottom:.4rem}
+.gar p{font-size:.84rem;color:var(--ink-2)}
+.photoband{position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);
+  margin:1.5rem 0;min-height:190px;display:flex;align-items:flex-end}
+.photoband img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.photoband__veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(21,42,68,.86),rgba(21,42,68,.2))}
+.photoband__txt{position:relative;color:#fff;padding:1.3rem 1.6rem;font-size:.92rem;max-width:56ch}
+.photoband__txt b{color:#fff}
+.packs{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.pack{background:linear-gradient(175deg,#FDFEFF,#F6F9FB);border:1px solid var(--line);
+  border-radius:var(--radius);padding:1.1rem 1.2rem;box-shadow:var(--shadow)}
+.pack h3{font-size:1rem;color:var(--navy);letter-spacing:.02em}
+.pack .mono{margin:.15rem 0 .55rem;display:block}
+.pack p{font-size:.82rem;color:var(--ink-2)}
+.chain{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem}
+.chain__step{background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);padding:1.05rem 1.15rem;box-shadow:var(--shadow)}
+.chain__k{font-family:var(--mono);font-size:.7rem;font-weight:700;color:var(--teal);
+  letter-spacing:.08em;margin-bottom:.35rem}
+.chain__step h3{font-size:.92rem;color:var(--navy-900);margin-bottom:.35rem}
+.chain__step p{font-size:.8rem;color:var(--ink-2)}
+
+/* --- Méthode --- */
+.layer{border-radius:var(--radius);border:1px solid var(--line);background:var(--card);
+  box-shadow:var(--shadow);padding:1.3rem 1.45rem;margin-bottom:1rem}
+.layer__head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
+  flex-wrap:wrap;margin-bottom:.5rem}
+.layer__head h3{font-size:1rem;color:var(--navy-900)}
+.rubs{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.7rem}
+.rub{font-family:var(--mono);font-size:.72rem;color:var(--navy-600);background:#F2F6FA;
+  border:1px solid var(--line);border-radius:6px;padding:.26rem .55rem}
+.axes{display:grid;grid-template-columns:repeat(2,1fr);gap:.65rem;margin-top:.9rem}
+.axe{display:flex;gap:.75rem;align-items:flex-start;background:#FBFCFE;
+  border:1px solid var(--line-2);border-radius:var(--radius-s);padding:.65rem .8rem}
+.axe__n{font-family:var(--mono);font-size:.78rem;font-weight:700;color:var(--teal);
+  flex:0 0 1.5rem;padding-top:.1rem}
+.axe__t{font-size:.85rem;color:var(--ink);font-weight:600}
+.axe__w{display:inline-block;margin-left:.45rem;font-size:.62rem;font-weight:700;
+  letter-spacing:.05em;color:var(--navy-600);background:#E8EFF7;border-radius:4px;
+  padding:.1rem .4rem;vertical-align:1px}
+.reserve{border:1px dashed var(--navy-600);background:#F6F8FB;border-radius:var(--radius);
+  padding:1.25rem 1.4rem;display:flex;gap:1.1rem;align-items:flex-start}
+.reserve__mark{flex:0 0 auto;margin-top:.15rem}
+.reserve h3{font-size:.95rem;color:var(--navy-900);margin-bottom:.3rem}
+.reserve p{font-size:.85rem;color:var(--ink-2);max-width:75ch}
+
+/* --- LENAXIS --- */
+.phases{display:grid;grid-template-columns:repeat(6,1fr);gap:.6rem;margin-bottom:1.1rem}
+.phase{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-s);
+  padding:.75rem .8rem;box-shadow:var(--shadow)}
+.phase .mono{color:var(--teal);font-weight:700;display:block;margin-bottom:.25rem}
+.phase span{font-size:.78rem;font-weight:600;color:var(--ink);line-height:1.4;display:block}
+.fx{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+.fxcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:1.2rem 1.3rem}
+.fxcard--star{border-color:var(--teal);background:linear-gradient(178deg,#FFFFFF,#F4FAFA)}
+.fxcard h3{font-size:.95rem;color:var(--navy-900);margin-bottom:.4rem;display:flex;
+  align-items:center;gap:.55rem;flex-wrap:wrap}
+.fxcard p{font-size:.85rem;color:var(--ink-2)}
+.videobox{background:var(--navy-900);border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow-l)}
+.videobox video{width:100%;display:block;background:#000;aspect-ratio:16/9}
+.videobar{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+  padding:.85rem 1.2rem;color:#C6D4E4;font-size:.8rem}
+.videobar b{color:#fff}
+.btn-dl{margin-left:auto;display:inline-block;font-size:.78rem;font-weight:700;color:#fff;
+  background:var(--teal);border-radius:8px;padding:.5rem .9rem}
+.btn-dl:hover{background:#0B5A63;text-decoration:none}
+
+/* --- Salle des documents --- */
+.docnote{background:var(--teal-soft);border:1px solid #C8E2E4;border-radius:var(--radius-s);
+  padding:.8rem 1rem;font-size:.82rem;color:#0B5A63;margin-bottom:1.2rem}
+.arch{display:flex;flex-direction:column;gap:.5rem}
+.liv{display:flex;align-items:center;gap:.6rem;border:1px solid var(--line-2);
+  border-radius:var(--radius-s);padding:.55rem .75rem;background:#FBFCFE}
+.liv__ext{font-family:var(--mono);font-size:.62rem;font-weight:700;color:#fff;
+  background:var(--navy-600);border-radius:4px;padding:.16rem .4rem;flex:0 0 auto}
+.liv__ext--v{background:var(--teal)}
+.liv a{font-size:.85rem;font-weight:600;color:#24466E}
+.liv span.t{font-size:.84rem;font-weight:600;color:var(--ink)}
+.liv .meta{margin-left:auto;font-family:var(--mono);font-size:.7rem;color:var(--steel);white-space:nowrap}
+.liv .sent{margin-left:auto;font-size:.64rem;font-weight:700;letter-spacing:.05em;
+  color:var(--green);background:var(--green-soft);border-radius:4px;padding:.16rem .5rem;
+  white-space:nowrap}
+.liv .wait{margin-left:auto;font-size:.64rem;font-weight:700;letter-spacing:.05em;
+  color:var(--orange);background:var(--orange-soft);border-radius:4px;padding:.16rem .5rem;
+  white-space:nowrap}
+.axcards{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.axcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:1.15rem 1.3rem;display:flex;flex-direction:column}
+.axcard__head{display:flex;align-items:flex-start;justify-content:space-between;gap:.8rem;
+  margin-bottom:.45rem}
+.axcard__code{font-family:var(--mono);font-size:.74rem;font-weight:700;color:var(--teal);
+  letter-spacing:.06em}
+.axcard h3{font-size:.93rem;color:var(--navy-900);margin:.15rem 0 .3rem}
+.axcard__dem{font-size:.8rem;color:var(--steel);font-style:italic;margin-bottom:.7rem}
+.livs{display:flex;flex-direction:column;gap:.45rem;margin-top:auto}
+
+/* --- Historique --- */
+.tl{position:relative;margin-left:.4rem;padding-left:1.6rem;border-left:2px solid var(--line)}
+.tl__item{position:relative;padding-bottom:1.5rem}
+.tl__item:last-child{padding-bottom:.2rem}
+.tl__dot{position:absolute;left:-1.6rem;top:.35rem;transform:translateX(-50%);
+  width:11px;height:11px;border-radius:50%;background:var(--teal);
+  box-shadow:0 0 0 3px var(--teal-soft)}
+.tl__item--major .tl__dot{background:var(--navy);box-shadow:0 0 0 3px #DCE6F2}
+.tl__date{font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--navy-600);
+  letter-spacing:.04em}
+.tl__t{font-size:.95rem;font-weight:700;color:var(--navy-900);margin:.15rem 0 .2rem}
+.tl__d{font-size:.85rem;color:var(--ink-2);max-width:78ch}
+
+/* --- Gouvernance --- */
+.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.role{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:1.2rem 1.3rem;border-top:3px solid var(--navy)}
+.role__logo{height:48px;display:flex;align-items:center;margin-bottom:.7rem}
+.role__logo img{max-height:48px;max-width:120px;object-fit:contain}
+.role h3{font-size:.98rem;color:var(--navy-900)}
+.role .who{font-size:.78rem;color:var(--steel);margin:.15rem 0 .6rem}
+.role p{font-size:.84rem;color:var(--ink-2)}
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.rule{background:#FBFCFE;border:1px solid var(--line-2);border-radius:var(--radius-s);
+  padding:.9rem 1.05rem}
+.rule h4{font-size:.84rem;color:var(--navy-900);margin-bottom:.3rem}
+.rule p{font-size:.8rem;color:var(--ink-2)}
+
+.sp-8{height:.5rem}.sp-16{height:1rem}.sp-24{height:1.5rem}.sp-32{height:2rem}
+
+/* --- Signature graphique --- */
+.contours{position:absolute;pointer-events:none}
+
+/* ==========================================================================
+   RESPONSIVE / IMPRESSION / MOUVEMENT RÉDUIT
+   ========================================================================== */
+@media (max-width:1080px){
+  .stats,.grid-4,.packs,.chain{grid-template-columns:repeat(2,1fr)}
+  .phases{grid-template-columns:repeat(3,1fr)}
+  .partners{grid-template-columns:1fr}
+}
+@media (max-width:860px){
+  .topbar__burger{display:flex}
+  .topbar__ctx{display:none}
+  .sidebar{transform:translateX(-100%);transition:transform .22s ease;box-shadow:var(--shadow-l)}
+  body.nav-open .sidebar{transform:translateX(0)}
+  .main{margin-left:0}
+  .view{padding:1.5rem 1.1rem 2rem}
+  .legal{padding:1.2rem 1.1rem 1.5rem}
+  .grid-2,.axcards,.axes,.fx,.rules,.roles{grid-template-columns:1fr}
+  .hero__body{padding:1.8rem 1.4rem 1.6rem}
+  .hero h1{font-size:1.5rem}
+}
+@media (max-width:560px){
+  .stats,.grid-4,.packs,.chain{grid-template-columns:1fr}
+  .phases{grid-template-columns:repeat(2,1fr)}
+}
+@media print{
+  .topbar,.sidebar,.scrim{display:none!important}
+  .main{margin:0;padding:0}
+  .view{display:block!important;page-break-after:always}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <button class="topbar__burger" id="burger" aria-label="Ouvrir la navigation">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="topbar__ctx"><b>Programme assurance filière bois</b> · AACFRANCE × Cabinet SECURE × GALACTIA</div>
+  <div class="topbar__spacer"></div>
+  <span class="topbar__date">Version 2 · 07/07/2026</span>
+  <span class="chip-conf">Confidentiel</span>
+</header>
+
+<div class="scrim" id="scrim"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar__brand">
+    <svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true">
+      <g fill="none" stroke="#4FB3BC" stroke-width="1.6">
+        <ellipse cx="20" cy="20" rx="6" ry="5.2"/>
+        <ellipse cx="20" cy="20" rx="11.5" ry="10" transform="rotate(-8 20 20)" opacity=".7"/>
+        <ellipse cx="20" cy="20" rx="17" ry="15" transform="rotate(6 20 20)" opacity=".4"/>
+      </g>
+    </svg>
+    <div class="sidebar__name">LENAXIS</div>
+  </div>
+  <div class="sidebar__tag">Plateforme d’échange<br>Programme assurance filière bois</div>
+  <nav class="nav" id="nav">
+    <a href="#synthese" data-view="synthese" class="active">Synthèse</a>
+    <a href="#programme" data-view="programme">Le programme</a>
+    <a href="#methode" data-view="methode">Méthode de tarification</a>
+    <a href="#lenaxis" data-view="lenaxis">Plateforme LENAXIS</a>
+    <a href="#documents" data-view="documents">Salle des documents</a>
+    <a href="#historique" data-view="historique">Historique des échanges</a>
+    <a href="#gouvernance" data-view="gouvernance">Gouvernance &amp; périmètres</a>
+  </nav>
+  <div class="sidebar__foot">
+    <b>AACFRANCE</b> · courtier mandataire<br>
+    <b>Cabinet SECURE</b> · ingénierie technique<br>
+    <b>GALACTIA</b> · placement marché<br><br>
+    Conception&nbsp;: Cabinet SECURE, Nice
+  </div>
+</aside>
+
+<main class="main">
+
+  <!-- ==================== SYNTHÈSE ==================== -->
+  <section class="view active" id="v-synthese">
+    <div class="hero">
+      <img class="hero__img" src="img/hero_bois.jpg" alt="Grumes empilées — filière bois">
+      <div class="hero__veil"></div>
+      <div class="hero__body">
+        <div class="eyebrow">Programme assurance filière bois</div>
+        <h1>Le socle technique du programme est construit.</h1>
+        <p>Cette plateforme réunit, dans un espace confidentiel unique, l’ensemble des travaux,
+          des pièces et des échanges du programme d’assurance dédié à la filière bois&nbsp;:
+          scieries, première et deuxième transformation, panneaux, emballage, traitement et
+          recyclage. Elle répond point par point au cadrage formalisé le 12&nbsp;mai&nbsp;2026 et
+          accompagne la consultation de marché conduite par GALACTIA.</p>
+        <div class="hero__parties">
+          <span class="party">AACFRANCE</span><span class="party--x">×</span>
+          <span class="party">CABINET SECURE</span><span class="party--x">×</span>
+          <span class="party">GALACTIA</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="partners">
+      <div class="partner">
+        <div class="partner__logo"><img src="img/logo_aacf.jpg" alt="AACFRANCE"></div>
+        <div class="partner__meta"><b>AACFRANCE</b>
+          <span>Courtier mandataire — garanties, formules, distribution</span></div>
+      </div>
+      <div class="partner">
+        <div class="partner__logo"><img src="img/logo_secure.jpg" alt="Cabinet SECURE"></div>
+        <div class="partner__meta"><b>Cabinet SECURE</b>
+          <span>Ingénierie technique et actuarielle — audits, tarification</span></div>
+      </div>
+      <div class="partner">
+        <div class="partner__logo"><span class="wordmark-galactia">GALACTIA</span></div>
+        <div class="partner__meta"><b>GALACTIA</b>
+          <span>Placement marché et réassurance — périmètre exclusif</span></div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat__n">≈&nbsp;63&nbsp;000</div>
+        <div class="stat__l">événements industriels analysés — base ARIA du Bureau d’analyse des risques et pollutions industrielles</div>
+      </div>
+      <div class="stat">
+        <div class="stat__n">28</div>
+        <div class="stat__l">cibles qualifiées au pipeline — Grand Est et Bourgogne-Franche-Comté</div>
+      </div>
+      <div class="stat">
+        <div class="stat__n">30&nbsp;<small>→</small>&nbsp;50</div>
+        <div class="stat__l">contrats visés à trente-six mois, soit 1,5 à 2,5&nbsp;millions d’euros de primes</div>
+      </div>
+      <div class="stat">
+        <div class="stat__n">31·10·26</div>
+        <div class="stat__l">offre techniquement structurable — premières affaires début 2027</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="eyebrow">Où en sommes-nous</div>
+        <div class="section-h">Réunion du 7 juillet 2026</div>
+        <p style="font-size:.88rem;color:var(--ink-2)">La salle des documents complète
+          (version&nbsp;1) a été transmise ce jour à GALACTIA et à AACFRANCE, et la présente
+          plateforme est ouverte&nbsp;: la vidéo de présentation de LENAXIS y est en ligne. La
+          démonstration en direct sera programmée avec Romain&nbsp;Leclercq, directeur
+          technique, sur un format de soixante-quinze minutes.</p>
+        <div class="sp-8"></div>
+        <p style="font-size:.88rem;color:var(--ink-2)">Les deux points restant à la main
+          d’AACFRANCE — mandat de recherche et de placement, pièces administratives — sont
+          traités en direct entre AACFRANCE et GALACTIA.</p>
+      </div>
+      <div class="card">
+        <div class="eyebrow">Couverture des onze axes du 12 mai</div>
+        <div class="section-h">Neuf axes couverts par le corpus SECURE</div>
+        <div class="axstrip" id="axstrip"></div>
+        <div class="axlegend">
+          <span><i style="background:var(--green)"></i>Couvert — corpus SECURE</span>
+          <span><i style="background:var(--orange)"></i>À la main d’AACFRANCE</span>
+          <span><i style="background:var(--steel)"></i>Sans objet dans le courriel d’origine</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROGRAMME ==================== -->
+  <section class="view" id="v-programme">
+    <div class="eyebrow">Le programme</div>
+    <div class="section-h">Quatre garanties indissociables, quatre formules d’entrée</div>
+    <p class="section-sub">La filière bois subit un rétrécissement durable de l’offre
+      d’assurance&nbsp;: sinistralité incendie structurellement élevée, exigences de prévention
+      croissantes, retraits successifs d’acteurs généralistes. Le programme répond par une
+      approche de souscription outillée&nbsp;: la prévention y est mesurée, tarifée et suivie
+      dans le temps, ce qui rend le risque à nouveau présentable au marché.</p>
+
+    <div class="grid-4">
+      <div class="gar"><h3>Dommages aux biens</h3>
+        <p>Incendie, explosion, foudre, événements naturels et assimilés, sur bâtiments,
+          matériels et stocks — capitaux arbitrés à partir des valeurs déclarées et vérifiées
+          en visite.</p></div>
+      <div class="gar"><h3>Pertes d’exploitation</h3>
+        <p>Marge brute et frais supplémentaires d’exploitation, périodes d’indemnisation
+          adaptées aux délais réels de reconstruction et de réapprovisionnement de la
+          filière.</p></div>
+      <div class="gar"><h3>Bris de machines</h3>
+        <p>Lignes de sciage, séchoirs, presses, affûtage, dommages électriques et biens
+          confiés — le cœur productif des sites, souvent le plus long à remplacer.</p></div>
+      <div class="gar"><h3>Responsabilité civile et atteinte à l’environnement</h3>
+        <p>Responsabilité d’exploitation et atteintes à l’environnement, en cohérence avec le
+          statut d’installation classée pour la protection de l’environnement de la plupart
+          des sites.</p></div>
+    </div>
+
+    <div class="photoband">
+      <img src="img/bande_sciages.jpg" alt="Sciages empilés sous abri">
+      <div class="photoband__veil"></div>
+      <div class="photoband__txt"><b>La doctrine du programme&nbsp;:</b> les quatre garanties
+        se souscrivent ensemble. Cette indissociabilité protège contre l’anti-sélection, donne
+        au porteur une vision complète de chaque risque et permet des franchises cohérentes,
+        modulées selon le score de prévention Uriel.</div>
+    </div>
+
+    <div class="section-h">Les formules</div>
+    <p class="section-sub">Quatre formules d’entrée dans le programme, calibrées par activité et
+      par tranche de chiffre d’affaires. Leur composition détaillée est arbitrée avec
+      AACFRANCE, garanties et franchises restant cohérentes d’une formule à l’autre.</p>
+    <div class="packs">
+      <div class="pack"><h3>Sérénité</h3><span class="mono">Formule socle</span>
+        <p>Le tronc commun des quatre garanties, pour les structures dont le profil de
+          prévention est en cours de consolidation.</p></div>
+      <div class="pack"><h3>Performance</h3><span class="mono">Formule intermédiaire</span>
+        <p>Capitaux et périodes d’indemnisation renforcés pour les sites dont le score de
+          prévention est établi.</p></div>
+      <div class="pack"><h3>Excellence</h3><span class="mono">Formule supérieure</span>
+        <p>Étendues maximales du programme, réservées aux sites démontrant un haut niveau de
+          maîtrise continue du risque.</p></div>
+      <div class="pack"><h3>Transition</h3><span class="mono">Formule d’accompagnement</span>
+        <p>Un parcours contractualisé de mise à niveau&nbsp;: plan de prévention daté,
+          réévaluation programmée, trajectoire vers les formules supérieures.</p></div>
+    </div>
+
+    <div class="sp-24"></div>
+    <div class="section-h">La chaîne opérationnelle</div>
+    <p class="section-sub">Chaque affaire suit le même parcours industrialisé, porté de bout en
+      bout par la plateforme LENAXIS.</p>
+    <div class="chain">
+      <div class="chain__step"><div class="chain__k">ÉTAPE 1</div><h3>Audit</h3>
+        <p>Pré-cartographie du site avant le déplacement, puis visite physique de deux à
+          quatre heures&nbsp;: douze modules d’inspection, photographies géolocalisées
+          analysées par la plateforme, pièces administratives collectées.</p></div>
+      <div class="chain__step"><div class="chain__k">ÉTAPE 2</div><h3>Évaluation</h3>
+        <p>Notation Uriel sur dix axes, taux technique et note de risque, identification des
+          écarts à combler avant présentation au marché.</p></div>
+      <div class="chain__step"><div class="chain__k">ÉTAPE 3</div><h3>Production</h3>
+        <p>Dossier de placement opposable, intercalaire courtier sur mesure, défense
+          technique de la cotation auprès des souscripteurs.</p></div>
+      <div class="chain__step"><div class="chain__k">ÉTAPE 4</div><h3>Suivi</h3>
+        <p>Pilotage des préconisations, relances automatiques, visite annuelle, notation
+          actualisée — la fidélisation par la preuve.</p></div>
+    </div>
+  </section>
+
+  <!-- ==================== MÉTHODE ==================== -->
+  <section class="view" id="v-methode">
+    <div class="eyebrow">Méthode de tarification</div>
+    <div class="section-h">Une cotation traçable, opposable, défendable ligne à ligne</div>
+    <p class="section-sub">Le tarificateur Uriel superpose une lecture qualitative propriétaire
+      à la méthode actuarielle de référence du marché. Chaque taux produit peut être expliqué,
+      justifié et défendu devant un souscripteur ou un réassureur.</p>
+
+    <div class="layer">
+      <div class="layer__head">
+        <h3>Couche actuarielle — méthode TRE FFSA, fascicule 6</h3>
+        <span class="pill pill--teal">Langage commun du marché</span>
+      </div>
+      <p style="font-size:.88rem;color:var(--ink-2);max-width:85ch">Taux de base par rubrique
+        professionnelle du bois, puis application des quatre familles de coefficients de la
+        méthode&nbsp;: construction, environnement, protection, majorations et rabais. Cette
+        assise officielle garantit que la cotation parle la langue de tous les souscripteurs.</p>
+      <div class="rubs">
+        <span class="rub">601 · menuiserie</span>
+        <span class="rub">602 · scieries</span>
+        <span class="rub">608 · panneaux</span>
+        <span class="rub">623 · emballages</span>
+        <span class="rub">628 · traitement</span>
+      </div>
+    </div>
+
+    <div class="layer">
+      <div class="layer__head">
+        <h3>Sur-couche qualitative Uriel — dix axes notés de 1 à 5</h3>
+        <span class="pill pill--teal">Modulation ±&nbsp;15&nbsp;% · score sur 100</span>
+      </div>
+      <p style="font-size:.88rem;color:var(--ink-2);max-width:85ch">Les quatre premiers axes,
+        déterminants dans la sinistralité de la filière, portent une pondération doublée. Le
+        score global sur 100 module le taux technique et oriente la stratégie de présentation
+        au marché.</p>
+      <div class="axes" id="urielAxes"></div>
+    </div>
+
+    <div class="layer">
+      <div class="layer__head">
+        <h3>Assise de sinistralité</h3>
+        <span class="pill pill--teal">≈&nbsp;63&nbsp;000 événements croisés</span>
+      </div>
+      <p style="font-size:.88rem;color:var(--ink-2);max-width:85ch">L’analyse s’appuie sur
+        environ 63&nbsp;000 événements industriels recensés dans la base publique ARIA du
+        Bureau d’analyse des risques et pollutions industrielles, croisés avec les référentiels
+        de prévention APSAD et la méthode D9 de dimensionnement des besoins en eau. Il en
+        ressort une lecture fréquence-gravité par rubrique d’activité, dont découlent les
+        scénarios de pertes maximales et les projections de rapport sinistres sur primes
+        présentées en salle des documents.</p>
+    </div>
+
+    <div class="reserve">
+      <svg class="reserve__mark" width="30" height="30" viewBox="0 0 30 30" aria-hidden="true">
+        <rect x="7" y="13" width="16" height="11" rx="2.4" fill="none" stroke="#2C4F7C" stroke-width="1.8"/>
+        <path d="M10.5 13 v-3.4 a4.5 4.5 0 0 1 9 0 V13" fill="none" stroke="#2C4F7C" stroke-width="1.8"/>
+      </svg>
+      <div>
+        <h3>Corpus fondateur — communication réservée</h3>
+        <p>Le détail complet de la méthode — coefficients calibrés, clauses intercalaires,
+          cas travaillés — est consigné dans huit livrables fondateurs représentant environ
+          cent quatre-vingt-dix pages. Ce corpus constitue l’actif méthodologique du Cabinet
+          SECURE&nbsp;; il est communiqué dans le cadre du partenariat formalisé, au bénéfice
+          exclusif du programme.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== LENAXIS ==================== -->
+  <section class="view" id="v-lenaxis">
+    <div class="eyebrow">Plateforme LENAXIS</div>
+    <div class="section-h">L’outil qui industrialise le programme</div>
+    <p class="section-sub">Quatorze années de développement, un code propriétaire entièrement
+      réécrit, une direction technique assurée par Romain&nbsp;Leclercq. LENAXIS couvre les six
+      phases de la gestion du risque, de l’identification jusqu’au retour d’expérience, en
+      intégrant le financement du risque par l’assurance.</p>
+
+    <div class="videobox">
+      <video controls preload="metadata" poster="img/video_poster.jpg" id="lenaxisVideo">
+        <source src="video/lenaxis_demonstration.mp4" type="video/mp4">
+        Votre navigateur ne lit pas ce format vidéo.
+      </video>
+      <div class="videobar">
+        <span><b>Vidéo de présentation LENAXIS</b> — 2&nbsp;min&nbsp;46, commentaire d’origine
+          du Cabinet SECURE</span>
+        <a class="btn-dl" href="video/lenaxis_demonstration.mp4" download="LENAXIS_presentation.mp4">Télécharger la vidéo</a>
+      </div>
+    </div>
+
+    <div class="sp-24"></div>
+    <div class="phases">
+      <div class="phase"><span class="mono">PHASE 1</span><span>Identification des risques</span></div>
+      <div class="phase"><span class="mono">PHASE 2</span><span>Évaluation et notation</span></div>
+      <div class="phase"><span class="mono">PHASE 3</span><span>Prévention et maîtrise</span></div>
+      <div class="phase"><span class="mono">PHASE 4</span><span>Financement par l’assurance</span></div>
+      <div class="phase"><span class="mono">PHASE 5</span><span>Suivi et pilotage</span></div>
+      <div class="phase"><span class="mono">PHASE 6</span><span>Retour d’expérience</span></div>
+    </div>
+
+    <div class="section-h" style="margin-top:.6rem">Fonctions distinctives</div>
+    <p class="section-sub">Deux capacités placent LENAXIS nettement au-dessus des pratiques
+      courantes du marché&nbsp;: la connaissance du site avant la visite, et l’exploitation
+      systématique de l’image comme donnée de risque.</p>
+
+    <div class="fx">
+      <div class="fxcard fxcard--star">
+        <h3>Pré-cartographie du risque <span class="pill pill--teal">Avant la visite</span></h3>
+        <p>Avant même le déplacement, la plateforme prépare le terrain&nbsp;: identification
+          des surfaces bâties depuis les vues aériennes, recoupement avec les bases
+          publiques — installations classées pour la protection de l’environnement,
+          inventaires des sols pollués BASOL et BASIAS, données d’entreprise Pappers —,
+          détection automatique des risques d’incendie et des voisinages sensibles, repérage
+          des stockages extérieurs et des accès des secours. L’auditeur arrive sur site avec
+          une carte du risque déjà esquissée.</p>
+      </div>
+      <div class="fxcard fxcard--star">
+        <h3>Détection des risques sur image <span class="pill pill--teal">Pendant et après la visite</span></h3>
+        <p>Les photographies géolocalisées prises en visite sont analysées automatiquement par
+          la plateforme&nbsp;: repérage des points critiques — accumulations de poussières,
+          stockages non conformes, encombrement des allées et des issues, installations
+          électriques dégradées, départs de corrosion —, horodatage, rattachement au module
+          d’audit concerné. Chaque constat visuel devient une donnée structurée, traçable et
+          opposable, réutilisée dans la notation et dans le suivi des préconisations.</p>
+      </div>
+      <div class="fxcard">
+        <h3>Audit digitalisé</h3>
+        <p>Douze modules d’inspection sur tablette, notation en temps réel, génération
+          automatique du rapport de visite avec photographies rattachées et plan d’actions
+          hiérarchisé.</p>
+      </div>
+      <div class="fxcard">
+        <h3>Tarification intégrée</h3>
+        <p>Calcul pas à pas selon la méthode TRE FFSA, application de la sur-couche Uriel,
+          simulation avant et après travaux de prévention, note de synthèse opposable exportée
+          pour le dossier de placement.</p>
+      </div>
+      <div class="fxcard">
+        <h3>Production du dossier</h3>
+        <p>Dossier de soumission structuré, intercalaire courtier sur mesure, traçabilité
+          complète des échanges — le temps de placement se réduit, la qualité du dossier
+          devient un argument commercial.</p>
+      </div>
+      <div class="fxcard">
+        <h3>Suivi et relances</h3>
+        <p>Chaque écart relevé devient une action pilotée — un responsable, une échéance, une
+          relance automatique à trois semaines — avec tableau de bord du portefeuille et
+          notation annuelle actualisée.</p>
+      </div>
+      <div class="fxcard">
+        <h3>Veille et alerte</h3>
+        <p>Un événement critique — produit, fournisseur, site — est signalé en moins de deux
+          minutes, pour agir avant que l’incident ne devienne un sinistre.</p>
+      </div>
+      <div class="fxcard">
+        <h3>Données souveraines</h3>
+        <p>Hébergement en Union européenne, conformité au règlement général sur la protection
+          des données et au règlement eIDAS pour la signature, certification ISO&nbsp;27001
+          visée en deuxième année d’exploitation.</p>
+      </div>
+    </div>
+
+    <div class="sp-16"></div>
+    <div class="card">
+      <div class="eyebrow">Démonstration en direct</div>
+      <p style="font-size:.88rem;color:var(--ink-2);max-width:85ch">Une séance de
+        soixante-quinze minutes est proposée, animée par David&nbsp;Museur avec
+        Romain&nbsp;Leclercq&nbsp;: parcours des modules à l’écran, cas réel de
+        pré-cartographie, analyse d’images de visite, calcul tarifaire commenté, production du
+        dossier de soumission.</p>
+    </div>
+  </section>
+
+  <!-- ==================== SALLE DES DOCUMENTS ==================== -->
+  <section class="view" id="v-documents">
+    <div class="eyebrow">Salle des documents</div>
+    <div class="section-h">Les pièces du programme, consultables et téléchargeables</div>
+    <p class="section-sub">Les pièces ci-dessous sont portées par la plateforme elle-même&nbsp;:
+      un clic les ouvre ou les télécharge, depuis un ordinateur comme depuis un téléphone.</p>
+
+    <div class="card">
+      <div class="arch">
+        <div class="liv"><span class="liv__ext">PDF</span>
+          <a href="docs/CR_Reunion_12_mai_2026_v3.pdf" download>Compte rendu de la réunion stratégique du 12 mai 2026 — version 3</a>
+          <span class="meta">5 pages</span></div>
+        <div class="liv"><span class="liv__ext">PDF</span>
+          <a href="docs/Courriel_recapitulatif_D_Cassagne_12_mai_2026.pdf" download>Courriel récapitulatif de David Cassagne — 12 mai 2026, réf. 260509</a>
+          <span class="meta">6 pages</span></div>
+        <div class="liv"><span class="liv__ext">PDF</span>
+          <a href="docs/Tableau_garanties_premier_jet_AACFRANCE.pdf" download>Tableau de garanties — premier jet AACFRANCE</a>
+          <span class="meta">2 pages</span></div>
+        <div class="liv"><span class="liv__ext">PDF</span>
+          <a href="docs/Programme_assurance_filiere_bois_presentation.pdf" download>Support de présentation — programme assurance filière bois</a>
+          <span class="meta">15 pages</span></div>
+        <div class="liv"><span class="liv__ext">PDF</span>
+          <a href="docs/Piece_reference_AACFRANCE_projet_SYMETRI.pdf" download>Pièce de référence AACFRANCE — projet de contrat SYMETRI</a>
+          <span class="meta">18 pages</span></div>
+        <div class="liv"><span class="liv__ext liv__ext--v">VIDÉO</span>
+          <a href="video/lenaxis_demonstration.mp4" download="LENAXIS_presentation.mp4">Vidéo de présentation LENAXIS — 2 min 46</a>
+          <span class="meta">mp4 · 5,2 Mo</span></div>
+      </div>
+    </div>
+
+    <div class="sp-32"></div>
+    <div class="section-h">Data room du 7 juillet — réponse aux onze axes du 12 mai</div>
+    <p class="section-sub">La data room complète (version&nbsp;1) a été transmise ce jour aux
+      destinataires. Elle reprend la numérotation du courriel de référence de
+      David&nbsp;Cassagne (12&nbsp;mai&nbsp;2026, 17&nbsp;h&nbsp;34)&nbsp;; le point&nbsp;8
+      n’existait pas dans le courriel d’origine. L’index ci-dessous en donne la composition,
+      axe par axe.</p>
+    <div class="docnote">Sur demande auprès du Cabinet SECURE, chaque pièce de la data room peut
+      être intégrée à la plateforme pour y devenir téléchargeable, comme le sont déjà les
+      archives ci-dessus.</div>
+    <div class="axcards" id="axcards"></div>
+
+    <div class="sp-16"></div>
+    <div class="reserve">
+      <svg class="reserve__mark" width="30" height="30" viewBox="0 0 30 30" aria-hidden="true">
+        <rect x="7" y="13" width="16" height="11" rx="2.4" fill="none" stroke="#2C4F7C" stroke-width="1.8"/>
+        <path d="M10.5 13 v-3.4 a4.5 4.5 0 0 1 9 0 V13" fill="none" stroke="#2C4F7C" stroke-width="1.8"/>
+      </svg>
+      <div>
+        <h3>Pièces en communication réservée</h3>
+        <p>Les huit livrables fondateurs du Cabinet SECURE (environ cent quatre-vingt-dix
+          pages&nbsp;: coefficients calibrés, clauses intercalaires, cas travaillés) ne
+          figurent pas sur la plateforme. Ils sont communiqués dans le cadre du partenariat
+          formalisé.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== HISTORIQUE ==================== -->
+  <section class="view" id="v-historique">
+    <div class="eyebrow">Historique des échanges</div>
+    <div class="section-h">Deux mois d’instruction, une trajectoire tenue</div>
+    <p class="section-sub">Chronologie des travaux et des échanges entre AACFRANCE, le Cabinet
+      SECURE et GALACTIA depuis l’ouverture du dossier.</p>
+    <div class="card">
+      <div class="tl" id="timeline"></div>
+    </div>
+  </section>
+
+  <!-- ==================== GOUVERNANCE ==================== -->
+  <section class="view" id="v-gouvernance">
+    <div class="eyebrow">Gouvernance &amp; périmètres</div>
+    <div class="section-h">Trois structures, trois compétences exclusives</div>
+    <p class="section-sub">Le programme repose sur une répartition nette des rôles. Chacun
+      apporte une compétence distinctive&nbsp;; aucun n’empiète sur le périmètre de l’autre.</p>
+
+    <div class="roles">
+      <div class="role">
+        <div class="role__logo"><img src="img/logo_aacf.jpg" alt="AACFRANCE"></div>
+        <h3>AACFRANCE</h3>
+        <div class="who">Sébastien Jurkowiak · Roger Ramos</div>
+        <p>Courtier mandataire&nbsp;: mandat et signature des conventions, structuration des
+          garanties et des formules, relation avec les entreprises de la filière,
+          distribution.</p>
+      </div>
+      <div class="role">
+        <div class="role__logo"><img src="img/logo_secure.jpg" alt="Cabinet SECURE"></div>
+        <h3>Cabinet SECURE</h3>
+        <div class="who">David Museur — Nice</div>
+        <p>Ingénierie technique et actuarielle&nbsp;: méthode de tarification, audits de
+          terrain, doctrine du programme, production des livrables techniques, conseil auprès
+          des deux autres structures.</p>
+      </div>
+      <div class="role">
+        <div class="role__logo"><span class="wordmark-galactia">GALACTIA</span></div>
+        <h3>GALACTIA</h3>
+        <div class="who">David Cassagne — Portugal</div>
+        <p>Placement marché et réassurance, à titre exclusif&nbsp;: consultation des porteurs,
+          négociation des capacités et des traités, conduite des présentations aux
+          réassureurs.</p>
+      </div>
+    </div>
+
+    <div class="sp-16"></div>
+    <div class="card">
+      <div class="eyebrow">Support technologique</div>
+      <div class="section-h" style="font-size:1.05rem">LENAXIS</div>
+      <p style="font-size:.88rem;color:var(--ink-2);max-width:85ch">Plateforme propriétaire
+        opérée par le Cabinet SECURE, direction technique Romain&nbsp;Leclercq. Elle porte la
+        chaîne opérationnelle du programme et héberge le présent espace d’échange.</p>
+    </div>
+
+    <div class="sp-24"></div>
+    <div class="section-h">Règles de fonctionnement</div>
+    <div class="rules">
+      <div class="rule"><h4>Périmètre exclusif de placement</h4>
+        <p>Porteurs, capacités, vagues de consultation et structures de réassurance relèvent
+          exclusivement de GALACTIA. Aucun document du Cabinet SECURE n’aborde ce champ.</p></div>
+      <div class="rule"><h4>Confidentialité</h4>
+        <p>L’ensemble des pièces de la plateforme est confidentiel, réservé aux trois
+          structures. Toute diffusion externe suppose l’accord écrit préalable des parties
+          concernées.</p></div>
+      <div class="rule"><h4>Validation avant transmission</h4>
+        <p>Aucune pièce n’est transmise à un tiers — porteur, réassureur, prospect — sans
+          validation écrite de la structure émettrice et de la structure pilote du
+          périmètre.</p></div>
+      <div class="rule"><h4>Langage des livrables</h4>
+        <p>Français clair, termes écrits en toutes lettres&nbsp;; seuls les référentiels
+          techniques établis (APSAD, méthode D9, TRE FFSA, NIMP15, GreCon) et les noms
+          institutionnels (INSEE, FNB, FCBA, ARIA/BARPI) figurent en sigle.</p></div>
+      <div class="rule"><h4>Accès et diffusion de la plateforme</h4>
+        <p>L’adresse de la plateforme est transmise en direct aux seuls destinataires
+          autorisés&nbsp;; la plateforme n’est ni référencée par les moteurs de recherche, ni
+          publiée ailleurs.</p></div>
+      <div class="rule"><h4>Mise à jour des pièces</h4>
+        <p>Les ajouts et mises à jour transitent par le Cabinet SECURE, qui tient le
+          versionnage et l’index de la salle des documents.</p></div>
+    </div>
+  </section>
+
+  <div class="legal">
+    <b>Document de travail confidentiel</b> — diffusion restreinte à AACFRANCE, au Cabinet
+    SECURE et à GALACTIA. Plateforme LENAXIS — conception et exploitation&nbsp;: Cabinet
+    SECURE, Nice. Version&nbsp;2 — 7&nbsp;juillet&nbsp;2026. Les montants, trajectoires et
+    volumes mentionnés sont des objectifs de travail partagés entre les parties, non des
+    engagements contractuels. Crédits photographiques&nbsp;: grumes empilées, image en
+    licence CC0&nbsp;; sciages sous abri, photographie CEphoto — Uwe&nbsp;Aranas, licence
+    CC&nbsp;BY-SA&nbsp;3.0, via Wikimedia Commons.
+  </div>
+</main>
+
+<script>
+/* ==========================================================================
+   Données de la plateforme
+   ========================================================================== */
+
+/* Onze axes du courriel de référence — statut : g = couvert, o = AACFRANCE, n = sans objet */
+var AXES = [
+  {n:"01", s:"g", t:"Structuration des produits et garanties",
+   dem:"Formules, exclusions, sous-limites, franchises — par activité et par tranche de chiffre d’affaires.",
+   livs:[{t:"Matrice des formules par activité", k:"DOCX", st:"sent"},
+         {t:"Tableau de garanties — version technique annotée", k:"DOCX", st:"sent"}]},
+  {n:"02", s:"g", t:"Prévention et maîtrise du risque",
+   dem:"Référentiels, clauses contractuelles, protocole d’escalade en cas de non-conformité.",
+   livs:[{t:"Cadre de prévention et protocole d’escalade", k:"DOCX", st:"sent"}]},
+  {n:"03", s:"g", t:"Données techniques et tarification",
+   dem:"Fréquence et gravité, coefficients, segmentation, zonage.",
+   livs:[{t:"Note de méthodologie actuarielle et de tarification", k:"DOCX", st:"sent"}]},
+  {n:"04", s:"g", t:"Cadrage réassurance — éléments techniques",
+   dem:"Matière technique au soutien de la consultation ; la conduite du placement relève de GALACTIA.",
+   livs:[{t:"Éléments techniques pour la gouvernance réassureur", k:"DOCX", st:"sent"}]},
+  {n:"05", s:"g", t:"Outils, données et plateforme",
+   dem:"Tarificateur, flux de travail, protection des données, démonstration.",
+   livs:[{t:"Fiche de présentation de la plateforme LENAXIS", k:"DOCX", st:"sent"},
+         {t:"Trame de démonstration — soixante-quinze minutes", k:"DOCX", st:"sent"},
+         {t:"Vidéo de présentation LENAXIS — en ligne sur la plateforme", k:"VIDÉO", st:"online"}]},
+  {n:"06", s:"g", t:"Étude de marché et ciblage",
+   dem:"Recensement, segmentation, approche géographique.",
+   livs:[{t:"Synthèse d’étude de marché — filière bois", k:"DOCX", st:"sent"},
+         {t:"Pipeline de vingt-huit cibles qualifiées", k:"DOCX", st:"sent"}]},
+  {n:"07", s:"g", t:"Plan d’affaires à cinq ans",
+   dem:"Volumes, primes, commissions, besoins de capacité par exercice.",
+   livs:[{t:"Plan d’affaires à cinq ans", k:"DOCX", st:"sent"}]},
+  {n:"08", s:"n", t:"Point absent du courriel d’origine",
+   dem:"La numérotation du courriel de référence passe du point 7 au point 9 ; la data room respecte cette numérotation.",
+   livs:[]},
+  {n:"09", s:"g", t:"Projection de sinistralité à l’atterrissage",
+   dem:"Scénarios de pertes maximales, vision centrale, dégradée et extrême, rapport sinistres sur primes.",
+   livs:[{t:"Note d’atterrissage de sinistralité et scénarios de pertes maximales", k:"DOCX", st:"sent"}]},
+  {n:"10", s:"o", t:"Mandat de recherche et de placement",
+   dem:"Lettre de mission — préalable réglementaire à toute consultation de marché.",
+   livs:[{t:"Mandat signé — retour attendu d’AACFRANCE", k:"PDF", st:"wait"}]},
+  {n:"11", s:"o", t:"Pièces administratives AACFRANCE",
+   dem:"Pièces réglementaires du courtier — traitées en direct entre AACFRANCE et GALACTIA, hors data room.",
+   livs:[]}
+];
+
+/* Dix axes Uriel — w = pondération renforcée */
+var URIEL = [
+  {t:"Atmosphères explosives et poussières de bois", w:true},
+  {t:"Prévention incendie active — référentiels APSAD R1 et R7", w:true},
+  {t:"Procédés à risque — points chauds, permis de feu (F19, Q18)", w:true},
+  {t:"Stockage et logistique", w:true},
+  {t:"Gestion environnementale — installations classées", w:false},
+  {t:"Gouvernance de la sécurité et formation", w:false},
+  {t:"Maintenance et maintien en condition opérationnelle", w:false},
+  {t:"Résilience opérationnelle et plan de continuité d’activité", w:false},
+  {t:"Sous-traitants et entreprises extérieures", w:false},
+  {t:"Sinistralité et culture du retour d’expérience", w:false}
+];
+
+/* Chronologie des échanges */
+var TIMELINE = [
+  {d:"6 mai 2026", t:"Transmission du dossier technique complet à AACFRANCE",
+   x:"Neuf documents remis à Sébastien Jurkowiak en versions protégées en lecture seule : dossier expert, méthode de tarification, guide d’audit de terrain, cahier des charges de la plateforme, trame de visite enrichie.", major:false},
+  {d:"12 mai 2026", t:"Réunion stratégique tripartite et cadrage en onze axes",
+   x:"Visioconférence AACFRANCE × Cabinet SECURE × GALACTIA. Le même jour à 17 h 34, courriel récapitulatif de David Cassagne (réf. 260509) formalisant onze axes de demandes.", major:true},
+  {d:"13 mai 2026", t:"Compte rendu officiel diffusé",
+   x:"Compte rendu de réunion (version 3) apportant la réponse point par point aux onze axes : livrable couvrant chaque demande et complément à produire, avec pilote nommé.", major:false},
+  {d:"21 mai 2026", t:"Cadrage de la mission d’accompagnement technique",
+   x:"Formalisation de la mission confiée par AACFRANCE au Cabinet SECURE : analyse de marché, méthodologie actuarielle, production des pièces de placement, prévention et appui à la négociation.", major:false},
+  {d:"10 juin 2026", t:"Réunion de travail AACFRANCE × Cabinet SECURE",
+   x:"Support de dix-neuf pages passant chaque axe en revue : neuf axes couverts par le corpus SECURE, deux points à la main d’AACFRANCE (mandat, pièces administratives).", major:false},
+  {d:"17 juin 2026", t:"Annotation technique du tableau de garanties",
+   x:"Le premier jet AACFRANCE est enrichi d’une colonne d’éclairage technique par le Cabinet SECURE : franchises modulées selon la notation Uriel, précisions de garanties, points d’arbitrage.", major:false},
+  {d:"7 juillet 2026", t:"Réunion avec GALACTIA — data room transmise, plateforme ouverte",
+   x:"Transmission de la data room complète (version 1) organisée selon la numérotation du courriel du 12 mai, ouverture du présent espace d’échange et mise en ligne de la vidéo de présentation LENAXIS. Démonstration en direct à programmer.", major:true}
+];
+
+/* ==========================================================================
+   Moteur de la plateforme
+   ========================================================================== */
+(function(){
+  "use strict";
+  var body = document.body;
+
+  /* ---------- Navigation ---------- */
+  var links = document.querySelectorAll(".nav a");
+  var views = document.querySelectorAll(".view");
+  function show(id){
+    var found = false;
+    views.forEach(function(v){ var on = (v.id === "v-"+id); v.classList.toggle("active", on); if(on) found = true; });
+    if(!found){ document.getElementById("v-synthese").classList.add("active"); id = "synthese"; }
+    links.forEach(function(a){ a.classList.toggle("active", a.dataset.view === id); });
+    body.classList.remove("nav-open");
+    window.scrollTo({top:0, behavior:"auto"});
+  }
+  window.addEventListener("hashchange", function(){ show((location.hash||"#synthese").slice(1)); });
+  show((location.hash||"#synthese").slice(1));
+
+  var burger = document.getElementById("burger");
+  var scrim = document.getElementById("scrim");
+  if(burger){ burger.addEventListener("click", function(){ body.classList.toggle("nav-open"); }); }
+  if(scrim){ scrim.addEventListener("click", function(){ body.classList.remove("nav-open"); }); }
+
+  /* ---------- Bandeau des onze axes (synthèse) ---------- */
+  var strip = document.getElementById("axstrip");
+  if(strip){ AXES.forEach(function(a){
+    var s = document.createElement("span");
+    s.className = "axchip axchip--" + a.s;
+    s.textContent = a.n;
+    s.title = a.t;
+    strip.appendChild(s);
+  }); }
+
+  /* ---------- Axes Uriel ---------- */
+  var ua = document.getElementById("urielAxes");
+  if(ua){ URIEL.forEach(function(x, i){
+    var d = document.createElement("div"); d.className = "axe";
+    var n = document.createElement("span"); n.className = "axe__n"; n.textContent = (i+1<10?"0":"")+(i+1);
+    var t = document.createElement("span"); t.className = "axe__t"; t.textContent = x.t;
+    if(x.w){ var w = document.createElement("span"); w.className = "axe__w"; w.textContent = "pondération ×2"; t.appendChild(w); }
+    d.appendChild(n); d.appendChild(t); ua.appendChild(d);
+  }); }
+
+  /* ---------- Index de la data room ---------- */
+  var STATUS = { g:{c:"pill--green", l:"Couvert — corpus SECURE"},
+                 o:{c:"pill--orange", l:"À la main d’AACFRANCE"},
+                 n:{c:"pill--gray", l:"Sans objet"} };
+  var LIVST = { sent:{c:"sent", l:"Transmis · 07/07"},
+                online:{c:"sent", l:"En ligne"},
+                wait:{c:"wait", l:"En attente"} };
+  var grid = document.getElementById("axcards");
+  if(grid){ AXES.forEach(function(a){
+    var c = document.createElement("div"); c.className = "axcard";
+    var head = document.createElement("div"); head.className = "axcard__head";
+    var left = document.createElement("div");
+    var code = document.createElement("div"); code.className = "axcard__code"; code.textContent = "AXE " + a.n;
+    var h = document.createElement("h3"); h.textContent = a.t;
+    left.appendChild(code); left.appendChild(h);
+    var pill = document.createElement("span"); var st = STATUS[a.s];
+    pill.className = "pill " + st.c; pill.textContent = st.l;
+    head.appendChild(left); head.appendChild(pill);
+    c.appendChild(head);
+    var dem = document.createElement("div"); dem.className = "axcard__dem"; dem.textContent = a.dem;
+    c.appendChild(dem);
+    if(a.livs.length){
+      var box = document.createElement("div"); box.className = "livs";
+      a.livs.forEach(function(l){
+        var row = document.createElement("div"); row.className = "liv";
+        var ext = document.createElement("span");
+        ext.className = "liv__ext" + (l.k === "VIDÉO" ? " liv__ext--v" : "");
+        ext.textContent = l.k; row.appendChild(ext);
+        var t = document.createElement("span"); t.className = "t"; t.textContent = l.t; row.appendChild(t);
+        var ls = LIVST[l.st] || LIVST.sent;
+        var tag = document.createElement("span"); tag.className = ls.c; tag.textContent = ls.l;
+        row.appendChild(tag);
+        box.appendChild(row);
+      });
+      c.appendChild(box);
+    }
+    grid.appendChild(c);
+  }); }
+
+  /* ---------- Chronologie ---------- */
+  var tl = document.getElementById("timeline");
+  if(tl){ TIMELINE.forEach(function(e){
+    var it = document.createElement("div"); it.className = "tl__item" + (e.major ? " tl__item--major" : "");
+    var dot = document.createElement("span"); dot.className = "tl__dot"; it.appendChild(dot);
+    var d = document.createElement("div"); d.className = "tl__date"; d.textContent = e.d; it.appendChild(d);
+    var t = document.createElement("div"); t.className = "tl__t"; t.textContent = e.t; it.appendChild(t);
+    var x = document.createElement("div"); x.className = "tl__d"; x.textContent = e.x; it.appendChild(x);
+    tl.appendChild(it);
+  }); }
+
+  /* ---------- Application installable (service worker) ---------- */
+  if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+    window.addEventListener("load", function(){
+      navigator.serviceWorker.register("sw.js").catch(function(){});
+    });
+  }
+})();
+</script>
+</body>
+</html>
